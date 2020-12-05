@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Interpolation functions for Chrt",
   "main": "dist/chrt-interpolations.js",
-  "module": "src/index.j",
+  "module": "dist/chrt-interpolations.esm.js",
   "watch": {
     "build": {
       "patterns": [
