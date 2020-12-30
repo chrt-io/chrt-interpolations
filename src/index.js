@@ -1,1 +1,7 @@
-export { linearInterpolation, splineInterpolation } from './curves';
+export {
+  linearInterpolation,
+  splineInterpolation,
+  stepInterpolation,
+  stepAfterInterpolation,
+  stepBeforeInterpolation,
+} from "./curves";

@@ -1,10 +1,11 @@
 import { svgPath } from '../layout';
+import { isNull, isInfinity } from '~/helpers';
 
 export default function splineInterpolation(data) {
   return svgPath(
     data.map(d => [
       this.parentNode.scales.x[this.scales.x](d[this.fields.x]),
-      this.parentNode.scales.y[this.scales.y](d[this.fields.y])
+      (isNull(d[this.fields.y]) || isInfinity(d[this.fields.y])) ? null : this.parentNode.scales.y[this.scales.y](d[this.fields.y])
     ]),
     bezierCommand
   );
