@@ -1,6 +1,6 @@
 {
   "name": "chrt-interpolations",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Interpolation functions for Chrt",
   "main": "dist/chrt-interpolations.js",
   "module": "dist/chrt-interpolations.esm.js",
