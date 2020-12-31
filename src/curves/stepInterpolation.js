@@ -1,7 +1,7 @@
 import { svgPath } from '../layout';
 import { isNull, isInfinity } from '~/helpers';
 
-export default function stepInterpolation(data, type) {
+export default function stepInterpolation(data, command = stepCommand) {
   return svgPath(
     data.map((d) => [
       this.parentNode.scales.x[this.scales.x](d[this.fields.x]),
@@ -9,15 +9,15 @@ export default function stepInterpolation(data, type) {
         ? null
         : this.parentNode.scales.y[this.scales.y](d[this.fields.y]),
     ]),
-    isNull(type) ? stepCommand : type === 'after' ? stepCommandAfter : stepCommandBefore
+    command
   );
 }
 
 export function stepAfterInterpolation(data) {
-  return stepInterpolation.call(this, data, 'after');
+  return stepInterpolation.call(this, data, stepCommandAfter);
 }
 export function stepBeforeInterpolation(data) {
-  return stepInterpolation.call(this, data, 'before');
+  return stepInterpolation.call(this, data, stepCommandBefore);
 }
 
 const stepCommand = (point, i, a) => {
