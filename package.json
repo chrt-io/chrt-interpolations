@@ -14,6 +14,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
+    "pretest": "rollup -c",
     "build": "rollup -c",
     "lint": "eslint src --fix",
     "watch": "npm-watch"
