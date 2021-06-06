@@ -13,8 +13,7 @@
     }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "pretest": "rollup -c",
+    "test": "jest",
     "postversion": "rollup -c",
     "build": "rollup -c",
     "lint": "eslint src --fix",
@@ -44,6 +43,7 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "babel-jest": "^26.6.3",
     "babel-plugin-root-import": "^6.6.0",
+    "chrt": "0.0.59",
     "eslint": "^7.26.0",
     "husky": "^4.2.5",
     "jest": "^26.6.3",

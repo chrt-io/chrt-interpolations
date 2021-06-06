@@ -2,18 +2,8 @@ export function isNull(value) {
   return value === null || value == null || typeof value === 'undefined';
 }
 
-export function uuid() {
-  return (
-    Math.random()
-      .toString(36)
-      .substring(2, 15) +
-    Math.random()
-      .toString(36)
-      .substring(2, 15)
-  );
-}
 export function isInfinity(value) {
-  return !isFinite(value);
+  return typeof value === 'number' && !isFinite(value);
 }
 
 export function getCoords(data) {
@@ -23,6 +13,7 @@ export function getCoords(data) {
   return data.map(d => {
     const x = (isNull(d[this.fields.x]) || isInfinity(d[this.fields.x])) ? null : this.parentNode.scales.x[this.scales.x](d[this.fields.x]);
     const y = (isNull(d[this.fields.y]) || isInfinity(d[this.fields.y])) ? null : this.parentNode.scales.y[this.scales.y](d[this.fields.y]);
+
     return [
       isInfinity(x) ? 0 : x,
       isInfinity(y) ? 0 : y,
