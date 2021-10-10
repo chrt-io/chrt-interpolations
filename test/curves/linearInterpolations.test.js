@@ -23,7 +23,7 @@ test('Test linearInterpolation with linear scale', () => {
   chart.add((lineChart = chrt.chrtLine()));
 
   const path = linearInterpolation.call(lineChart, data);
-  expect(path).toStrictEqual(['M40,280', 'L260,20', 'L480,150']);
+  expect(path).toStrictEqual(['M40,280', 'L310,20', 'L580,150']);
 });
 
 test('Test linearInterpolation with ordinal scale', () => {
@@ -51,13 +51,9 @@ test('Test linearInterpolation with ordinal scale', () => {
   chart.add((lineChart = chrt.chrtLine()));
 
   const path = linearInterpolation.call(lineChart, data);
-  expect(path).toStrictEqual([
-    'M113.33333333333333,280',
-    'L260,20',
-    'L406.66666666666663,150'
-  ]);
+  expect(path).toStrictEqual(['M130,280', 'L310,20', 'L490,150']);
 });
 
 test('Test lineCommand with NaN', () => {
-  expect(lineCommand(['NaN','NaN'])).toStrictEqual('L0,0');
-})
+  expect(lineCommand(['NaN', 'NaN'])).toStrictEqual('L0,0');
+});

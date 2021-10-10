@@ -1,5 +1,4 @@
 import commonjs from 'rollup-plugin-commonjs';
-import { uglify } from 'rollup-plugin-uglify';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import {terser} from "rollup-plugin-terser";
@@ -7,8 +6,6 @@ import * as meta from "./package.json";
 
 const STARTED = 2020;
 const YEAR = (new Date).getFullYear();
-
-console.log(Object.assign({}, ...Object.keys(meta.dependencies || {}).filter(key => /^chrt-/.test(key)).map(key => ({[key]: "chrt"}))))
 
 const config = {
   input: "src/index.js",
@@ -54,7 +51,6 @@ export default [
     },
     plugins: [
       ...config.plugins,
-      uglify(),
       terser({
         output: {
           preamble: config.output.banner
