@@ -1,5 +1,5 @@
 import { svgPath } from '../layout';
-import { getCoords } from '~/helpers';
+import { getCoords } from '../helpers';
 
 export default function linearInterpolation(data) {
   return svgPath(

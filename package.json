@@ -11,7 +11,7 @@
   ],
   "type": "module",
   "main": "src/index.js",
-  "module": "dist/chrt-interpolations.esm.js",
+  "module": "src/index.js",
   "jsdelivr": "dist/chrt-interpolations.min.js",
   "unpkg": "dist/chrt-interpolations.min.js",
   "exports": {

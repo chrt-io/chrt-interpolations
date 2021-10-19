@@ -1,5 +1,5 @@
 import * as chrt from 'chrt';
-import linearInterpolation, { lineCommand } from '~/curves/linearInterpolation';
+import linearInterpolation, { lineCommand } from '../../src/curves/linearInterpolation';
 
 test('Test linearInterpolation with linear scale', () => {
   const data = [
