@@ -1,6 +1,6 @@
 {
   "name": "chrt-interpolations",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Interpolation functions for Chrt",
   "keywords": [
     "chrt",
