@@ -2,7 +2,7 @@ export function isNull(value) {
   return value === null || value == null || typeof value === 'undefined';
 }
 
-export function isInfinity(value) {
+function isInfinity(value) {
   return typeof value === 'number' && !isFinite(value);
 }
 
