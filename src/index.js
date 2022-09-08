@@ -1,5 +1,5 @@
 export {
-  linearInterpolation as line,
+  linearInterpolation as linear,
   splineInterpolation as spline,
   stepInterpolation as step,
   stepAfterInterpolation as stepAfter,
