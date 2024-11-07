@@ -1,73 +1,144 @@
 # chrt-interpolations
-Interpolation functions to be used with the `curve` method of `chrt-line` for **chrt**
 
-## How to build
+Component providing interpolation functions for creating smooth curves between data points in chrt. These interpolation functions are primarily used by the line chart component to define how points are connected, but can be used by any component that needs to create paths between points.
 
-###  Install the dependencies
-```
-npm install
-```
+The module provides three main types of interpolation:
 
-###  Build the package
-```
-npm build
-```
-### Developing
-If you want to develop and see the changes reloaded live into another app you can use the watch script
-```
-npm run watch
-```
+- Linear interpolation (`linearInterpolation`): straight lines between points
+- Spline interpolation (`splineInterpolation`): smooth curves using Bézier curves
+- Step interpolation (`stepInterpolation`, `stepBeforeInterpolation`, `stepAfterInterpolation`): step-wise connections between points
 
-## Use it as a module
+### Observable Examples and Documentation:
 
-### Method 1 - tgz package
+- [Chrt Interpolations - Observable](https://observablehq.com/d/75be84fdba4cebb4?collection=@chrt/chrt)
+- [Introducing Chrt - Observable](https://observablehq.com/@chrt/introducing-chrt?collection=@chrt/chrt)
 
-#### Use the tgz provided in the repository
-You can use the `chrt-interpolations-VERSION.tgz` package. The following commands will expand the chrt module in the `node_modules` folder of your project. Ready to be used with the usual `import` command:
-```
-cp chrt-interpolations-VERSION.tgz SOMEWHERE
-cd myproject
-npm install SOMEWHERE/chrt-interpolations-VERSION.tgz
+## Installing
+
+For use with Webpack, Rollup, or other Node-based bundlers, `chrt-interpolations` can be installed as a standalone module via a package manager such as Yarn or npm.
+
+```bash
+npm install chrt-interpolations chrt-core
 ```
 
-#### Create a tgz npm package
-You can create a package for testing with
-```
-npm pack
-```
-This command will create a file called `chrt-interpolations-VERSION.tgz` in the root folder of chrt.
+`chrt-interpolations` can be used as part of the `chrt` package:
 
-### Method 2 - symlinked package
-
-####  Create a global node module
-```
-npm link
-```
-This creates `chrt-interpolations` module inside your global `node_modules` so that you can import it.
-
-####  Use the module in a different app
-```
-npm link chrt
-```
-This will create a sym link to the module created in your global.
-
-## Use it in your code
-After having installed or sym-linked the node you can use it as usual
-```
-import { splineInterpolation, linearInterpolation } from 'chrt-interpolations';
+```bash
+npm install chrt
 ```
 
+## Usage
 
+### ES6 / Bundlers (Webpack, Rollup, etc.)
 
-## Testing
+```js
+import Chrt from "chrt-core";
+import {
+  linearInterpolation,
+  splineInterpolation,
+  stepInterpolation,
+} from "chrt-interpolations";
 
-### Unit test with Jest
-Run `npm run test` to run all the tests on the code with Jest.
+// Create a line chart with spline interpolation
+Chrt().add(chrt.line().curve(splineInterpolation));
 ```
-npm run test
+
+## API Reference
+
+### Linear Interpolation
+
+#### `linearInterpolation(data)`
+
+Creates straight lines between consecutive points. This is the simplest form of interpolation.
+
+```js
+chrt.line().curve(linearInterpolation);
 ```
 
-To run only one test:
+### Spline Interpolation
+
+#### `splineInterpolation(data)`
+
+Creates smooth curves between points using cubic Bézier curves. This produces a more natural-looking line that smoothly transitions between points.
+
+```js
+chrt.line().curve(splineInterpolation);
 ```
-npx jest test/scales/scaleLinear.test.js
+
+### Step Interpolation
+
+Three types of step interpolation are available:
+
+#### `stepInterpolation(data)`
+
+Creates step-wise connections between points, with the step occurring at the midpoint between two data points.
+
+```js
+chrt.line().curve(stepInterpolation);
+```
+
+#### `stepBeforeInterpolation(data)`
+
+Creates step-wise connections with the vertical step occurring before the data point.
+
+```js
+chrt.line().curve(stepBeforeInterpolation);
+```
+
+#### `stepAfterInterpolation(data)`
+
+Creates step-wise connections with the vertical step occurring after the data point.
+
+```js
+chrt.line().curve(stepAfterInterpolation);
+```
+
+### Helper Functions
+
+#### `lineCommand(point)`
+
+Helper function for linear interpolation that generates SVG line commands.
+
+#### `bezierCommand(point, index, points)`
+
+Helper function for spline interpolation that generates SVG cubic Bézier curve commands.
+
+### Examples
+
+#### Basic Line Chart with Different Interpolations
+
+```js
+// Linear interpolation
+Chrt().add(chrt.line().data(data).curve(linearInterpolation));
+
+// Smooth curve
+Chrt().add(chrt.line().data(data).curve(splineInterpolation));
+
+// Step-wise
+Chrt().add(chrt.line().data(data).curve(stepInterpolation));
+```
+
+#### Multiple Lines with Different Interpolations
+
+```js
+Chrt()
+  .add(chrt.line().data(data1).curve(linearInterpolation).stroke("#ff0000"))
+  .add(chrt.line().data(data2).curve(splineInterpolation).stroke("#00ff00"))
+  .add(
+    chrt.line().data(data3).curve(stepBeforeInterpolation).stroke("#0000ff"),
+  );
+```
+
+#### Area Chart with Smooth Interpolation
+
+```js
+Chrt().add(
+  chrt
+    .line()
+    .data(data)
+    .curve(splineInterpolation)
+    .area()
+    .fill("#ff0000")
+    .fillOpacity(0.3),
+);
 ```
